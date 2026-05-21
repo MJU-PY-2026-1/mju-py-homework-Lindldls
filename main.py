@@ -104,6 +104,8 @@ def analyze_score():
             temp = input("")
         else :
             print("저런. 업이 다 지워지기에는 부족하네요.\n다시 저희랑 놀아야겠어요. 푸흐흐.")
+            temp = input("...")
+            return 99
     else :
         print("기록이 없네요?")
 
@@ -179,7 +181,14 @@ while True:
 
     else :
         print("제대로 해요.")
-    
-
-if not(choose == 6 or choose == 5):
-    analyze_score()
+    if not(choose == 6 or choose == 5):
+        analyze_score()
+        if day == 0 :
+            re = analyze_score()
+            if re == 99:
+                day = 3
+                repu_list = []
+                print(f"한 번 더 기회를 드릴게요. 이번에는 {day}일.")
+                temp = input("...)")
+                continue
+            
