@@ -91,6 +91,17 @@ def faction_menu():
     ft = input('추가할 팩션 이름? : ')
     faction_list.append(ft)
 
+def use_faction( ch ):
+    for i in faction_list:
+        if i[0] == ch:
+            print(f"\n{ch}의 하위 종족명을 6개 입력해주세요.")
+            for j in range (6):
+                sub = input(f"{j+1}번째 종족 : ")
+                i.append(sub)
+            print("\n저장 완료했어요.")
+            print(i)
+            return None
+        print("\n없는 팩션이잖아요. 조심해요.")
 
 # -----------------------------점수 분석
 def analyze_score():
