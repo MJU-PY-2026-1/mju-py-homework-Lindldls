@@ -86,18 +86,27 @@ def showbread():
 # ---------------------팩션 기능
 def faction_menu():
     faction_list.sort()
+    
     print("\n현재 팩션 목록")
-    print(faction_list)
+    for i in faction_list:
+        print(f"팩션 [{i[0]}] :", end="")
+        for j in range(1, len(i)):
+            print(i[j], end="/")
+            print("")
+            
     ft = input('추가할 팩션 이름? : ')
-    faction_list.append(ft)
+    temp_list = [ft]
+    faction_list.append(temp_list)
 
 def use_faction( ch ):
     for i in faction_list:
         if i[0] == ch:
             print(f"\n{ch}의 하위 종족명을 6개 입력해주세요.")
+            new_sp = []
             for j in range (6):
                 sub = input(f"{j+1}번째 종족 : ")
-                i.append(sub)
+                new_sp.append(sub)
+            i[1:0] = new_sp
             print("\n저장 완료했어요.")
             print(i)
             return None
@@ -162,17 +171,30 @@ while True:
     elif choose == 3 :
         showbread()
     elif choose == 4 :
-        print("새로 만드는 거면 1번, 있는 팩션에 추가하는 거면 2번")
+        temp = int(input("새로 만드는 거면 1번, 있는 팩션에 추가하는 거면 2번. 그냥 보는 건 3번. "))
         if (temp == 1):
             faction_menu()
         elif (temp == 2):
             print("\n현재 팩션 목록")
-            print(faction_list)
-            name = input("수정할 팩션 이름을 선택해요.")
+            for i in faction_list:
+                print(f"팩션 [{i[0]}] :", end="")
+                for j in range(1, len(i)):
+                    print(i[j], end="/")
+                print("")
+            name = input("수정할 팩션 이름을 선택해요. ")
             use_faction(name)
+        elif (temp == 3):
+            print("\n현재 팩션 목록")
+            for i in faction_list:
+                print(f"팩션 [{i[0]}] :", end="")
+                for j in range(1, len(i)):
+                    print(i[j], end="/")
+                print("")
+            temp = input("...")
         else : 
             print("뭐에요.\n")
             temp = input("...")
+            
     elif choose == 5 : 
         print("잘못 누른 거죠?")
         __1 = input("Y / N    ")
