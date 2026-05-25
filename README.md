@@ -1,4 +1,4 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/MiVO5zfB)
+<img width="956" height="1089" alt="image" src="https://github.com/user-attachments/assets/5b3e9506-f879-4d43-bb06-6e3f1610de09" />[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/MiVO5zfB)
 # 🐍 [2026-01] 나만의 파이썬 소프트웨어 개발 프로젝트
 
 ## 1. 시나리오 제목
@@ -78,21 +78,28 @@
 
 ## 🟨 [3차 과제: V3.0] 무한 루프와 메뉴 시스템 (반복문) - 향후 작성 예정
 ### **✨3차 과제 업데이트 내용:**
-  * 내용.
+  * while True 기반 메인 메뉴 구조 설계
+  * 함수 분리 및 역할 구분, 전역변수와 지역변수 사용
+  * return 값 활용 방식 수정
+  * 2차원 리스트를 활용한 데이터 저장 구조 구현
+  * 문자열 입력 처리 문제 수정
+  * 출력 형식 개선
     
 ### **🤖 AI 파트너십 과정**
- 1. **내용 1**
-    * **프롬프트 요약:**  ... 
-    * **적용 내용:** ....
+ 1. **데이터 저장 형식 추천**
+    * **딕셔너리 형식이 제일 좋은 건 맞는데, 아직 안 배워서 그걸 못해. 다른 방식으로 팩션 데이터를 저장하고 덮어쓸 수 있게 하려면 어떻게 해야 해?**  ... 
+    * **2차원 리스트와 append, 슬라이싱을 활용해 데이터 덮어쓰기와 저장 방법을 알려주었다.:** ....
     
 ### **🛠️ Troubleshooting & 기술 회고:**
-  1. **문제 1:** ...
-     * **원인:** ...
-     * **해결:** ..
+  1. **temp == 1 에서 늘 false가 나는 이유 :** ...
+     * **input()은 str 타입으로 데이터를 받는데, 이걸 까먹고 int타입으로 조건을 맞춰버려서 늘 False가 발생.** ...
+     * **해결: int(input(""))형태로 수정하여 조건분기를 정확하게 맞춤. ** ..
      
 ### **📁 증빙 자료:**
   * [3차_AI협업캡처.pdf 첨부 완료] (첨부 후 링크)
-  * [3차과제_실행결과.jpg]
+  * [ai협업증명_3차과제.pdf](https://github.com/user-attachments/files/28207154/ai._3.pdf)
+  * [3차과제_실행결과.jpg]<img width="956" height="1089" alt="image" src="https://github.com/user-attachments/assets/6bf39268-51ae-4326-88e2-7f767b2d9d9b" />
+
 <br>
 
 ### 🟥 [4차 과제: V4.0] 모듈화 및 데이터 확장 (배열과 함수) - 🌟최종 완성 -- 향후 작성 예정
