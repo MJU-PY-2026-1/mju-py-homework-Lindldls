@@ -162,7 +162,17 @@ while True:
     elif choose == 3 :
         showbread()
     elif choose == 4 :
-        faction_menu()
+        print("새로 만드는 거면 1번, 있는 팩션에 추가하는 거면 2번")
+        if (temp == 1):
+            faction_menu()
+        elif (temp == 2):
+            print("\n현재 팩션 목록")
+            print(faction_list)
+            name = input("수정할 팩션 이름을 선택해요.")
+            use_faction(name)
+        else : 
+            print("뭐에요.\n")
+            temp = input("...")
     elif choose == 5 : 
         print("잘못 누른 거죠?")
         __1 = input("Y / N    ")
