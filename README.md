@@ -1,4 +1,4 @@
-<img width="956" height="1089" alt="image" src="https://github.com/user-attachments/assets/5b3e9506-f879-4d43-bb06-6e3f1610de09" />[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/MiVO5zfB)
+(https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/MiVO5zfB)
 # 🐍 [2026-01] 나만의 파이썬 소프트웨어 개발 프로젝트
 
 ## 1. 시나리오 제목
