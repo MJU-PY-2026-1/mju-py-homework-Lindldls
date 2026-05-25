@@ -224,14 +224,13 @@ while True:
 
     else :
         print("제대로 해요.")
-    if not(choose == 6 or choose == 5):
-        analyze_score()
-        if day == 0 :
-            re = analyze_score()
-            if re == 99:
-                day = 3
-                repu_list = []
-                print(f"한 번 더 기회를 드릴게요. 이번에는 {day}일.")
-                temp = input("...)")
-                continue
-            
+    
+    if day == 0 :
+        re = analyze_score()
+        if re == 99:
+            day = 3
+            repu_list = []
+            print(f"한 번 더 기회를 드릴게요. 이번에는 {day}일.")
+            temp = input("...)")
+            continue
+        
