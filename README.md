@@ -124,5 +124,9 @@
      
 ### **📁 증빙 자료:**
   * [4차_AI협업캡처.pdf 첨부 완료] (첨부 후 링크)
+  * [4차과제_AI협업증명.pdf](https://github.com/user-attachments/files/28678977/4._AI.pdf)
+
+<img width="550" height="613" alt="image" src="https://github.com/user-attachments/assets/a96d88c6-a4cb-4e4b-8db5-fbd4f102c088" />
+
   * [4차과제_실행결과.jpg]
 <br>
