@@ -53,13 +53,13 @@ def load_data():
         input("...")
         
 def save_data(): #파일저장
-    with open("faction_data.txt"), "w", encoding="utf-8") as file:
+    with open("faction_data.txt", "w", encoding="utf-8") as file:
         for i in range(len(faction_list)):
-            for j in range(len(fation_list[i])):
+            for j in range(len(faction_list[i])):
                 file.write(faction_list[i][j])
                 if j != (len(faction_list[i])-1):
                     file.write(",")
-                file.write("\n")
+            file.write("\n")
     print("\n당신이 적은 게 무사히 기록되었어요.")
             
 # -------------------------------손님 받기
@@ -70,12 +70,12 @@ def meet_customer():
     temp = input("그럼 주사위를 굴려볼까요? 행운을 빕니다.")
     num = r.randint(0,5)
 
-    current_species = faction_dic[active_faction][num]
+    current_species = faction_dict[active_faction][num]
     meet_list.append(current_species)
     
     
     input(f"{num+1}. 좋은 숫자 같나요?")
-    print(f"\n{current_species]}를 모시겠습니다. 기호를 잘 맞춰주세요.")
+    print(f"\n{current_species}를 모시겠습니다. 기호를 잘 맞춰주세요.")
     temp = input("...대답.")
     print("")
     for i in range(3, 0, -1):
@@ -109,7 +109,7 @@ def show_book():
 
 # -----------------빵 종류
 def showbread():
-    print("\n당신이 가지고 있는 것.\n|")
+    print("\n당신이 가지고 있는 것.\n")
     for i in bread :
         print(f" {i} |", end=" ")
     temp = input("\n확인했나요?")
@@ -128,7 +128,7 @@ def print_faction():
 # ---------------------팩션 기능
 def faction_menu():
     faction_list.sort()
-    print_faciton()
+    print_faction()
             
     ft = input('추가할 팩션 이름? : ')
     temp_list = [ft]
@@ -143,7 +143,7 @@ def use_faction( ch ):
             for j in range (6):
                 sub = input(f"{j+1}번째 종족 : ")
                 new_sp.append(sub)
-            i[1:0] = new_sp
+            i[1:] = new_sp
 
             faction_dict[ch] = new_sp
             print("\n저장 완료했어요. 이제 적용 가능해요.")
@@ -199,9 +199,6 @@ load_data()
 
 day = 5
 while True:
-    if day == 0:
-        print("\n모든 일정이 끝났어요.")
-        break
 
     weight = 1.0
     print("\n"*5)
@@ -282,6 +279,7 @@ while True:
             continue
     elif choose == 6 :
         print("그래요. 또 봐요. 다음이 있다면요.")
+        save_data()
         break
     elif choose == 7 :
         print("이름을 바꾸다니. 처음에 잘 정하지 그랬어요.")
@@ -300,4 +298,6 @@ while True:
             print(f"한 번 더 기회를 드릴게요. 이번에는 {day}일.")
             temp = input("...)")
             continue
+        else :
+            break
         
