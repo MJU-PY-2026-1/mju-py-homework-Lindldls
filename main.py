@@ -1,6 +1,5 @@
-# 파일이름 : main.py (3차과제까지)
+# 파일이름 : main.py (4차과제까지)
 # 작 성 자 : 60251684 전자공학 이인 
-
 
 import random as r
 
@@ -8,8 +7,12 @@ import random as r
 shop_name = ""
 bread = ["곰보빵", "사과빵", "마늘빵", "뼈다귀", "생크림빵", "칼빵"]
 faction_list = []
-species = ["좀비", "마녀", "뱀파이어", "웨어울프", "밴시", "목 없는 기사"]
+
+faction_dict = { "default" : ["좀비", "마녀", "뱀파이어", "웨어울프", "밴시", "목 없는 기사"]}
+active_faction = "default" # 현재 찾아오는 팩션 
+
 meet_list = []
+
 reputation = 0.0
 repu_list = []
 
@@ -34,6 +37,31 @@ def makeshop():
     global shop_name 
     shop_name = input("\n빵집 이름을 입력해주세요. 이왕이면 기억에 잘 남는 거로요.")
 
+
+def load_data():
+    global faction_list, faction_dict
+    try : 
+        with open("faction_data.txt", "r", encoding="utf-8") as file:
+            for line in file:
+                parts = line.strip().split(",")
+                faction_list.append(parts) # 이중 리스트에서 불러온 데이터를 딕셔너리 형태로 변환해서 저장
+                if len(parts) >= 7:
+                    faction_dict[parts[0]] = parts[1:7]
+        print("\n옛날 기록을 잘 불러왔어요. 도움이 될까요?")
+    except FileNotFoundError:
+        print("\n이전 기록이 없어요. 저런.")
+        input("...")
+        
+def save_data(): #파일저장
+    with open("faction_data.txt"), "w", encoding="utf-8") as file:
+        for i in range(len(faction_list)):
+            for j in range(len(fation_list[i])):
+                file.write(faction_list[i][j])
+                if j != (len(faction_list[i])-1):
+                    file.write(",")
+                file.write("\n")
+    print("\n당신이 적은 게 무사히 기록되었어요.")
+            
 # -------------------------------손님 받기
 def meet_customer():
     global weight 
@@ -41,10 +69,13 @@ def meet_customer():
     print("\n손님을 받으시는군요. 열심히 하시네요.")
     temp = input("그럼 주사위를 굴려볼까요? 행운을 빕니다.")
     num = r.randint(0,5)
-    meet_list.append(num)
-    # print(meet_list)
+
+    current_species = faction_dic[active_faction][num]
+    meet_list.append(current_species)
+    
+    
     input(f"{num+1}. 좋은 숫자 같나요?")
-    print(f"\n{species[num]}를 모시겠습니다. 기호를 잘 맞춰주세요.")
+    print(f"\n{current_species]}를 모시겠습니다. 기호를 잘 맞춰주세요.")
     temp = input("...대답.")
     print("")
     for i in range(3, 0, -1):
@@ -69,8 +100,8 @@ def meet_customer():
 # ----------------*******도감 출력
 def show_book():
     if meet_list:
-        for i in meet_list:
-            print(f"당신은 지금까지 '{species[i]}'를 만나봤습니다.")
+        for sp in meet_list:
+            print(f"당신은 지금까지 '{sp}'를 만나봤습니다.")
         temp = input("확인했나요?")
     else:
         print("\n아직 만난 분이 없으세요.")
@@ -83,22 +114,28 @@ def showbread():
         print(f" {i} |", end=" ")
     temp = input("\n확인했나요?")
 
+def print_faction():
+    print("\n 현재 저장된 팩션 이중 리스트 : ")
+    if not faction_list :
+        print("등록된 커스텀 팩션이 없어요.")
+        return
+    for i in range(len(faction_list)):
+        print(f"팩션 [{faction_list[i][0]}] : ", end="")
+        for j in range(1, len(faction_list[i])):
+            print(faction_list[i][j], end="/")
+        print("")
+
 # ---------------------팩션 기능
 def faction_menu():
     faction_list.sort()
-    
-    print("\n현재 팩션 목록")
-    for i in faction_list:
-        print(f"팩션 [{i[0]}] :", end="")
-        for j in range(1, len(i)):
-            print(i[j], end="/")
-            print("")
+    print_faciton()
             
     ft = input('추가할 팩션 이름? : ')
     temp_list = [ft]
     faction_list.append(temp_list)
 
 def use_faction( ch ):
+    global faction_dict
     for i in faction_list:
         if i[0] == ch:
             print(f"\n{ch}의 하위 종족명을 6개 입력해주세요.")
@@ -107,10 +144,29 @@ def use_faction( ch ):
                 sub = input(f"{j+1}번째 종족 : ")
                 new_sp.append(sub)
             i[1:0] = new_sp
-            print("\n저장 완료했어요.")
-            print(i)
+
+            faction_dict[ch] = new_sp
+            print("\n저장 완료했어요. 이제 적용 가능해요.")
             return None
         print("\n없는 팩션이잖아요. 조심해요.")
+
+def apply_faction():
+    global active_faction
+    print("\n=========현재 적용 가능 팩션=========")
+    for key, value in faction_dict.items():
+        print(f"{key} : {value}")
+
+    sel = input("\n어떤 손님을 받으시겠어요? 이름을 정확히 적어요.\n : ")
+    if sel in faction_dict:
+        if len(faction_dict[sel]) >= 6:
+            active_faction = sel
+            print(f"\n잘 적용했어요. 이제부터는 {sel} 팩션의 손님들이 방문해요...")
+            input("...")
+        else:
+            print("\n하위 종족이 6개는 넘어야 재미가 있어요.")
+    else:
+        print("\n그런 팩션은 없는데요.")
+        input("...")
 
 # -----------------------------점수 분석
 def analyze_score():
@@ -137,6 +193,10 @@ def analyze_score():
 # ---------------------------main
 intro()
 makeshop()
+load_data()
+
+
+
 day = 5
 while True:
     if day == 0:
@@ -150,47 +210,54 @@ while True:
     print("1. 손님 받기")
     print("2. ■■ 도감")
     print("3. 당신에게 있는 무언가.")
-    print("4. 팩션")
+    print("4. 팩션 관리")
     print("5. 추천하지 않습니다. 선택하지 마세요.")
     print("6. ...오늘은 그만하실 건가요?")
     print("7. 이름을 바꾸실래요?")
-    ch = input("무엇을 하시겠습니까? 번호로 입력하세요. Ex : 1\n")
-    choose = 0
+
+    try : 
+        ch = input("무엇을 하시겠습니까? 번호로 입력하세요. Ex : 1\n")
+        choose = int(ch)
+    except ValueError:
+        print("\n숫자만 입력해요. 규칙을 잊지 마요.")
+        temp = input("...")
+        continue
+    
     if ch not in ("1", "2", "3", "4", "5", "6", "7") :
         print("이게 아닐 텐데요. 다시 입력해주세요. ")
         temp = input("...")
-    else :
-        choose = int(ch)
-                          
+        continue
+
+    
     if choose == 1:
         score = meet_customer()
         repu_list.append(score)
         day -= 1
+        
     elif choose == 2 : 
         show_book()
+        
     elif choose == 3 :
         showbread()
+        
     elif choose == 4 :
-        temp = int(input("새로 만드는 거면 1번, 있는 팩션에 추가하는 거면 2번. 그냥 보는 건 3번. "))
+        try :
+            temp = int(input("새로 만드는 거면 1번, 있는 팩션에 추가하는 거면 2번. \n그냥 보는 건 3번. 적용하는 건 4번. "))
+        except ValueError:
+            print("숫자로 대답해요.")
+            continue
+            
         if (temp == 1):
             faction_menu()
         elif (temp == 2):
-            print("\n현재 팩션 목록")
-            for i in faction_list:
-                print(f"팩션 [{i[0]}] :", end="")
-                for j in range(1, len(i)):
-                    print(i[j], end="/")
-                print("")
+            print_faction()
             name = input("수정할 팩션 이름을 선택해요. ")
             use_faction(name)
         elif (temp == 3):
-            print("\n현재 팩션 목록")
-            for i in faction_list:
-                print(f"팩션 [{i[0]}] :", end="")
-                for j in range(1, len(i)):
-                    print(i[j], end="/")
-                print("")
+            print_faction()
             temp = input("...")
+        elif (temp == 4):
+            apply_faction()
         else : 
             print("뭐에요.\n")
             temp = input("...")
@@ -221,7 +288,7 @@ while True:
         makeshop()
         print("이번에는 오래 갔으면 좋겠는데.")
         temp = input("...")
-
+        
     else :
         print("제대로 해요.")
     
